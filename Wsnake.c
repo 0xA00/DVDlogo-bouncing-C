@@ -8,20 +8,15 @@
 // github: 0xA00    
 /////////////////////////
 
-
-// get the includes
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include <time.h>
 #include <signal.h>
-
-
-
-// get terminal size
 #include <sys/ioctl.h>
 #include <unistd.h>
+
 
 //get the length of the terminal
 int getTermLength(){
@@ -77,8 +72,6 @@ void ctrlC(int sig){
 }
 
 
-//create a matrice of chars that is 20x10 and with directions
-
 void printmatrice(char* matrix[7][15]){
 	//get length and width of matrix
 	
@@ -92,7 +85,6 @@ void printmatrice(char* matrix[7][15]){
 }
 
 void printmatricewithcoords(char* matrix[7][15], int x, int y){
-	//get length and width of the terminal
 	int termLength = getTermLength();
 	int termWidth = getTermWidth();
 	
@@ -115,9 +107,7 @@ void printmatricewithcoords(char* matrix[7][15], int x, int y){
 	
 }
 
-int randomiser(){
-	//choose between -1 and 1 and not any other number
-	
+int randomiser(){	
 	int random = rand() % 2;
 	if(random == 0){
 		return -1;
@@ -173,13 +163,11 @@ int main(int argc, char *argv[]){
 
 	
 
-	//create a loop that moves the cursor around the screen
 	signal(SIGINT, ctrlC);
 
 	 printf("\033[?25l");
 	while(1){
 		//clear the screen
-		
 		system("clear");
 		//move the cursor
 		x += leftright;
@@ -204,16 +192,13 @@ int main(int argc, char *argv[]){
                         }                                                                                                                                                                     
                         matrix[0][0] = newColor;
 
-
+			
 		}
 		//print the matrix
 		printmatricewithcoords(matrix, x, y);
 		//wait 0.1 seconds
 		usleep(100000);
 	}
-
-	
-
 
 	//exit
 	return 0;
