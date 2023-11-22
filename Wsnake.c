@@ -1,3 +1,14 @@
+/////////////////////////
+// Creator: 0xa0                    
+// Date: 22/11/2023 Montpellier, France                                 
+// Description:
+// This is a program that creates a DVD screensaver logo in the terminal that will bounce off the sides
+// of the terminal. It is written in C and it seems like the first of its kind. It is a fun project.
+// email: sarah [at] 0xa0 [dot] dev
+// github: 0xA00    
+/////////////////////////
+
+
 // get the includes
 #include <stdio.h>
 #include <stdlib.h>
