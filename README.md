@@ -1,6 +1,8 @@
 # DVDlogo-bouncing-C
 short C program where a DVD logo will bounce of the terminal
 
+![White snake gif demonstration](https://github.com/0xA00/DVDlogo-bouncing-C/blob/main/Wsnakegif.gif)
+
 # How to run it
 * ## Directly with `Wsnake`
 
