@@ -10,17 +10,13 @@
 
 
 
-// get the includes
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include <time.h>
 #include <signal.h>
-
-
-
-// get terminal size
 #include <sys/ioctl.h>
 #include <unistd.h>
 
@@ -38,62 +34,13 @@ int getTermWidth(){
     return w.ws_col;
 }
 
-void printCentered(char *str){
-    int termWidth = getTermWidth();
-    int strLength = strlen(str);
-    int spaces = (termWidth)/2;
-    for(int i = 0; i < spaces; i++){
-	printf(" ");
-    }
-    printf("%s", str);
-}
-
-void printCenteredWithNewLine(char *str){
-    printCentered(str);
-    printf("\n");
-}
-
-void printMiddleScreen(char *str){
-	//print the top half of the screen
-	int termLength = getTermLength();
-	int strLength = strlen(str);
-	int spaces = (termLength)/2;
-	for(int i = 0; i < spaces; i++){
-		printf("\n");
-	}
-	printCenteredWithNewLine(str);
-	//print the bottom half of the screen
-	for(int i = 0; i < spaces; i++){
-		printf("\n");
-	}
-}
-
-
-
-
 void ctrlC(int sig){
 	printf("\033[?25h");
 	system("clear");
 	exit(0);
 }
 
-
-//create a matrice of chars that is 20x10 and with directions
-
-void printmatrice(char* matrix[7][15]){
-	//get length and width of matrix
-	
-	
-	for(int i = 0; i < 7; i++){
-		for(int j = 0; j < 15; j++){
-			printf("%s", matrix[i][j]);
-		}
-		printf("\n");
-	}
-}
-
 void printmatricewithcoords(char* matrix[7][15], int x, int y){
-	//get length and width of the terminal
 	int termLength = getTermLength();
 	int termWidth = getTermWidth();
 	
@@ -166,16 +113,11 @@ int main(int argc, char *argv[]){
 	int x = getTermWidth()/2;
 	int y = getTermLength()/2;
 
-
-	
-
-	//create a loop that moves the cursor around the screen
 	signal(SIGINT, ctrlC);
 
 	 printf("\033[?25l");
 	while(1){
 		//clear the screen
-		
 		system("clear");
 		//move the cursor
 		x += leftright;
@@ -207,9 +149,6 @@ int main(int argc, char *argv[]){
 		//wait 0.1 seconds
 		usleep(100000);
 	}
-
-	
-
 
 	//exit
 	return 0;
