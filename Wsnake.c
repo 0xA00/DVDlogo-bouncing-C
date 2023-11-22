@@ -1,22 +1,28 @@
-/////////////////////////
-// Creator: 0xa0                    
-// Date: 22/11/2023 Montpellier, France                                 
+// Creator: 0xa0
+// Date: 22/11/2023 Montpellier, France
 // Description:
 // This is a program that creates a DVD screensaver logo in the terminal that will bounce off the sides
 // of the terminal. It is written in C and it seems like the first of its kind. It is a fun project.
 // email: sarah [at] 0xa0 [dot] dev
-// github: 0xA00    
-/////////////////////////
+// github: 0xA00
 
+
+
+
+
+// get the includes
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include <time.h>
 #include <signal.h>
+
+
+
+// get terminal size
 #include <sys/ioctl.h>
 #include <unistd.h>
-
 
 //get the length of the terminal
 int getTermLength(){
@@ -72,6 +78,8 @@ void ctrlC(int sig){
 }
 
 
+//create a matrice of chars that is 20x10 and with directions
+
 void printmatrice(char* matrix[7][15]){
 	//get length and width of matrix
 	
@@ -85,20 +93,16 @@ void printmatrice(char* matrix[7][15]){
 }
 
 void printmatricewithcoords(char* matrix[7][15], int x, int y){
+	//get length and width of the terminal
 	int termLength = getTermLength();
 	int termWidth = getTermWidth();
 	
-	int spacesBefore = y;
-		
-	for(int i = 0; i < spacesBefore; i++){
-		printf("\n");
-	}
+	y = y+1;
+	x = x+1;
 
 
 	for(int i = 0; i < 7; i++){
-			for(int j = 0; j < x; j++){
-			printf(" ");
-		}
+		printf("\033[%d;%dH", y+i, x);
 		for(int j = 0; j < 15; j++){
 			printf("%s", matrix[i][j]);
 		}
@@ -107,7 +111,9 @@ void printmatricewithcoords(char* matrix[7][15], int x, int y){
 	
 }
 
-int randomiser(){	
+int randomiser(){
+	//choose between -1 and 1 and not any other number
+	
 	int random = rand() % 2;
 	if(random == 0){
 		return -1;
@@ -163,11 +169,13 @@ int main(int argc, char *argv[]){
 
 	
 
+	//create a loop that moves the cursor around the screen
 	signal(SIGINT, ctrlC);
 
 	 printf("\033[?25l");
 	while(1){
 		//clear the screen
+		
 		system("clear");
 		//move the cursor
 		x += leftright;
@@ -192,13 +200,16 @@ int main(int argc, char *argv[]){
                         }                                                                                                                                                                     
                         matrix[0][0] = newColor;
 
-			
+
 		}
 		//print the matrix
 		printmatricewithcoords(matrix, x, y);
 		//wait 0.1 seconds
 		usleep(100000);
 	}
+
+	
+
 
 	//exit
 	return 0;
